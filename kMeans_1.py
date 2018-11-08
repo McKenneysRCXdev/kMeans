@@ -94,14 +94,14 @@ def trainingFromCSVdata(CSVfilename, trainingFileHeaderNum=0, percentPointsToCap
     BestMeanSet, BestNumberOfMeans, BestThresholdSet = optimumMeans(convertedData, columnInfo, percentPointsToCapture = percentPointsToCapture)
     return BestMeanSet, BestThresholdSet, columnInfo
 
-##Create function that outputs values that are outside the maximum threshold
+
 def anomaliesDetected(dataSet,columnSet, trueMeanSet, ThresholdActual):
     # Returns and array of values that are outside the maximum threshold of the optimum means. Also outputs the percentage of points that are anomalies
     # The function goes through each point and evaluates if it's within the threshold of any mean.
     # Inputs for this function are the dataSet, instance of the class, the mean set, and the thresholds.
-    # This function is called in testCSVData and is used to output the
+    # This function is called in testCSVData and is used to output the percent anomalies and an array of which values are anomalies
     normalizedData = columnSet.normalizeInputArray(dataSet)
-    anomolyArr = []
+    anomalyArr = []
     numberAnomalies = 0
     for u in range(len(normalizedData)):
         currPoint = normalizedData[u, :]
@@ -113,9 +113,9 @@ def anomaliesDetected(dataSet,columnSet, trueMeanSet, ThresholdActual):
                 notWithinThresh = False
         if notWithinThresh:
             numberAnomalies += 1
-        anomolyArr.append(notWithinThresh)
-    percentAnomaly = float(numberAnomalies) / float(len(anomolyArr))
-    return anomolyArr, percentAnomaly
+        anomalyArr.append(notWithinThresh)
+    percentAnomaly = float(numberAnomalies) / float(len(anomalyArr))
+    return anomalyArr, percentAnomaly
 
 
 def optimumMeans(dataSet, columnSet, numIterationsPerMean = 3, percentPointsToCapture = 0.9):
