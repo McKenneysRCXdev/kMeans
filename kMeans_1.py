@@ -9,7 +9,7 @@ def demonstrationData(trainingFileName, testingFileName, trainingFileHeaderNum =
     # This function runs training data and testing data through the kMeans algorithm. In this function, results are printed to the console, and anomalies are identified.
     # Inputs containing the number of header rows allow the algorithm to ignore headers.
     #percent Points to Capture need to be prompted to the user as it controls how sensitive the AI is to anomalies
-    percentPointsToCapture = 1.01
+    percentPointsToCapture = 0.8
     BestMeanSet, BestThresholdSet, columnInfo = trainingFromCSVdata(trainingFileName, trainingFileHeaderNum, percentPointsToCapture)
     print("Best Number of Means is {0}".format(len(BestMeanSet)))
     print("Type " + columnInfo.columnList[0].dataType)
@@ -414,4 +414,4 @@ if False:
     AwesomeMeanSet , AwesomeNumberOfMeans, highestThreshold = optimumMeans(convertedData,testColumnInfo)
     anomArr, anomPercent = anomaliesDetected(testData,testColumnInfo, AwesomeMeanSet, highestThreshold)
 else:
-    demonstrationData("PIU-608 After Heater Fix.csv","PIU-608 Before Heater Fix.csv", 1, 1)
+    demonstrationData("CHOA TU Broken.csv","CHOA TU Broken.csv", 1, 1)
